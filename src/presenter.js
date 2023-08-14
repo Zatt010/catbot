@@ -5,7 +5,7 @@ const generoDiv = document.getElementById("genero-div");
 const edadDiv = document.getElementById("edad-div");  
 const generoButton = document.getElementById("genero-button");
 const edadButton = document.getElementById("edad-button");  
-let genero = "";  // Definimos la variable genero en un nivel superior
+let genero = "";
 
 botForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -18,7 +18,7 @@ botForm.addEventListener("submit", (event) => {
 generoButton.addEventListener("click", () => {
   const selectedGenero = document.querySelector('input[name="genero"]:checked');
   if (selectedGenero) {
-    genero = selectedGenero.value;  // Asignamos el valor de genero
+    genero = selectedGenero.value;
     generoDiv.style.display = "none";
     edadDiv.style.display = "block";
   }
@@ -45,7 +45,18 @@ edadButton.addEventListener("click", () => {
     generoSaludo = "saludos";
   }
 
-  const mensajeFinal = generoSaludo + ", " + name;
+  const horaActual = new Date().getHours(); // Obtiene la hora actual del sistema
+  let saludoHora = "";
+
+  if (horaActual >= 0 && horaActual < 12) {
+    saludoHora = "Buenos días";
+  } else if (horaActual >= 12 && horaActual < 18) {
+    saludoHora = "Buenas tardes";
+  } else {
+    saludoHora = "Buenas noches";
+  }
+
+  const mensajeFinal = `${saludoHora} y ${generoSaludo} ${name}`;
   saludoDiv.innerHTML = mensajeFinal;
   edadDiv.style.display = "none";
 });
