@@ -575,26 +575,35 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"jZ78i":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _saludador = require("./saludador");
-var _saludadorDefault = parcelHelpers.interopDefault(_saludador);
-const first = document.querySelector("#name");
-const form = document.querySelector("#bot-form"); // Corrected ID
-const div = document.querySelector("#saludo-div");
-form.addEventListener("submit", (event)=>{
+var _saludadorJs = require("./saludador.js");
+var _saludadorJsDefault = parcelHelpers.interopDefault(_saludadorJs);
+const botForm = document.getElementById("bot-form");
+const saludoDiv = document.getElementById("saludo-div");
+const generoDiv = document.getElementById("genero-div");
+const generoButton = document.getElementById("genero-button");
+botForm.addEventListener("submit", (event)=>{
     event.preventDefault();
-    div.innerHTML = "<p>" + (0, _saludadorDefault.default)(first) + "</p>";
+    const nameInput = document.getElementById("name");
+    const saludo = (0, _saludadorJsDefault.default)(nameInput);
+    saludoDiv.innerHTML = saludo;
+    generoDiv.style.display = "block";
+});
+generoButton.addEventListener("click", ()=>{
+    const selectedGenero = document.querySelector('input[name="genero"]:checked');
+    if (selectedGenero) {
+        const genero = selectedGenero.value;
+        const name = document.getElementById("name").value;
+        let generoSaludo = "";
+        if (genero === "Masculino") generoSaludo = "bienvenido";
+        else if (genero === "Femenino") generoSaludo = "bienvenida";
+        else generoSaludo = "saludos";
+        const mensajeFinal = generoSaludo + ", " + name;
+        saludoDiv.innerHTML = mensajeFinal;
+        generoDiv.style.display = "none";
+    }
 });
 
-},{"./saludador":"3Yd5J","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3Yd5J":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function saludar(nameInput) {
-    const name = nameInput.value;
-    return "Hola, " + name;
-}
-exports.default = saludar;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./saludador.js":"3Yd5J"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -624,6 +633,15 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["5w1gS","jZ78i"], "jZ78i", "parcelRequirec771")
+},{}],"3Yd5J":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function saludar(nameInput) {
+    const name = nameInput.value;
+    return "Hola, " + name;
+}
+exports.default = saludar;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["5w1gS","jZ78i"], "jZ78i", "parcelRequirec771")
 
 //# sourceMappingURL=index.87ae31f1.js.map

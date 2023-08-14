@@ -1,14 +1,26 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>CHATBOT</title>
+  </head>
   <body>
     <h1>CHATBOT</h1>
     <form id="bot-form">
       <label for="name">Cual es tu nombre:</label>
       <input type="text" id="name" />
-      
       <input type="submit" value="Saludo" id="saludo-button" />
     </form>
     <div id="saludo-div"></div>
-  
+    <div id="genero-div" style="display: none;">
+      <p>Elige tu género:</p>
+      <input type="radio" id="femenino" name="genero" value="Femenino" />
+      <label for="femenino">Femenino</label><br />
+      <input type="radio" id="masculino" name="genero" value="Masculino" />
+      <label for="masculino">Masculino</label><br />
+      <input type="radio" id="no-decir" name="genero" value="Prefiero no decirlo" />
+      <label for="no-decir">Prefiero no decirlo</label><br />
+      <button id="genero-button">Enviar</button>
+    </div>
 
     <script type="module" src="./src/presenter.js"></script>
   </body>

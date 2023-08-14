@@ -1,11 +1,34 @@
-import saludar from "./saludador";
+import saludar from "./saludador.js";
+const botForm = document.getElementById("bot-form");
+const saludoDiv = document.getElementById("saludo-div");
+const generoDiv = document.getElementById("genero-div");
+const generoButton = document.getElementById("genero-button");
 
-const first = document.querySelector("#name");
-const form = document.querySelector("#bot-form"); // Corrected ID
-const div = document.querySelector("#saludo-div");
-
-form.addEventListener("submit", (event) => {
+botForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  const nameInput = document.getElementById("name");
+  const saludo = saludar(nameInput);
+  saludoDiv.innerHTML = saludo;
+  generoDiv.style.display = "block";
+});
 
-  div.innerHTML = "<p>" + saludar(first) + "</p>";
+generoButton.addEventListener("click", () => {
+  const selectedGenero = document.querySelector('input[name="genero"]:checked');
+  if (selectedGenero) {
+    const genero = selectedGenero.value;
+    const name = document.getElementById("name").value;
+    let generoSaludo = "";
+
+    if (genero === "Masculino") {
+      generoSaludo = "bienvenido";
+    } else if (genero === "Femenino") {
+      generoSaludo = "bienvenida";
+    } else {
+      generoSaludo = "saludos";
+    }
+
+    const mensajeFinal = generoSaludo + ", " + name;
+    saludoDiv.innerHTML = mensajeFinal;
+    generoDiv.style.display = "none";
+  }
 });

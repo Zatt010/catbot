@@ -4,4 +4,3 @@ function saludar(nameInput) {
 }
 
 export default saludar;
-
